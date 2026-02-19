@@ -1,0 +1,72 @@
+model = "gpt-5.3-codex"
+model_reasoning_effort = "high"
+
+[projects."/mnt/c/Users/edward.maire/PhpstormProjects/zaikoio"]
+trust_level = "trusted"
+
+[projects."C:\\Users\\edward.maire"]
+trust_level = "trusted"
+
+[projects."/home/edward_maire/projects/zaikoio"]
+trust_level = "trusted"
+
+[projects."/home/edward_maire/workProjects/zaikoio"]
+trust_level = "trusted"
+
+model_auto_compact_token_limit = 100000
+
+[projects.'\\?\C:\Users\edward.maire\PhpstormProjects\zaikoio']
+trust_level = "trusted"
+
+[projects.'C:\Users\edward.maire\perso\KampoQuiz']
+trust_level = "trusted"
+
+[projects.'\\?\C:\Users\edward.maire\PhpstormProjects\access-queue']
+trust_level = "trusted"
+
+[sandbox_workspace_write]
+network_access = true
+
+[shell_environment_policy]
+exclude = [
+  "*PASSWORD*",
+  "*PASS*",
+  "*SECRET*",
+  "*TOKEN*",
+  "*API_KEY*",
+  "*ACCESS_KEY*",
+  "*PRIVATE_KEY*",
+  "*SIGNING_KEY*",
+  "*ENCRYPT*",
+  "*CIPHER*",
+  "*DSN*",
+  "*SALT*",
+  "*HASH*",
+  "AWS_*",
+  "AZURE_*",
+  "GCP_*",
+  "GCPOGLE_*",
+  "GOOGLE_*",
+  "OPENAI_*",
+  "STRIPE_*",
+  "SENTRY_*",
+  "SENDGRID_*",
+  "TWILIO_*",
+  "PAYPAL_*",
+]
+
+[mcp_servers.laravel-boost]
+command = "php"
+args = ["artisan", "boost:mcp"]
+startup_timeout_sec = 120.0
+tool_timeout_sec = 120.0
+
+[mcp_servers.chrome-devtools]
+command = "cmd"
+args = ["/c", "npx", "-y", "chrome-devtools-mcp@latest"]
+env = { SystemRoot="C:\\Windows", PROGRAMFILES="C:\\Program Files" }
+startup_timeout_ms = 20_000
+tool_timeout_sec = 300
+
+[features]
+elevated_windows_sandbox = true
