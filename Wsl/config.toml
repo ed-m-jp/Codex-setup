@@ -3,28 +3,7 @@ model_reasoning_effort = "high"
 
 suppress_unstable_features_warning = true
 
-[projects."/mnt/c/Users/edward.maire/PhpstormProjects/zaikoio"]
-trust_level = "trusted"
-
-[projects."C:\\Users\\edward.maire"]
-trust_level = "trusted"
-
-[projects."/home/edward_maire/projects/zaikoio"]
-trust_level = "trusted"
-
-[projects."/home/edward_maire/workProjects/zaikoio"]
-trust_level = "trusted"
-
 model_auto_compact_token_limit = 100000
-
-[projects.'\\?\C:\Users\edward.maire\PhpstormProjects\zaikoio']
-trust_level = "trusted"
-
-[projects."/mnt/c/Users/edward.maire"]
-trust_level = "untrusted"
-
-[projects."/mnt/c/Users/edward.maire/PhpstormProjects/access-queue"]
-trust_level = "trusted"
 
 [sandbox_workspace_write]
 network_access = true
@@ -57,6 +36,9 @@ exclude = [
   "PAYPAL_*",
 ]
 
+[features]
+rmcp_client = true
+
 [mcp_servers.laravel-boost]
 command = "php"
 args = ["artisan", "boost:mcp"]
@@ -64,14 +46,16 @@ startup_timeout_sec = 120.0
 tool_timeout_sec = 120.0
 
 [mcp_servers.chrome-devtools]
-  command = "/mnt/c/Windows/System32/cmd.exe"
-  args = [
-    "/c",
-    "npx.cmd",
-    "-y",
-    "chrome-devtools-mcp@latest",
-    "--executablePath=C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-    "--isolated"
-  ]
-  startup_timeout_ms = 30_000
-  tool_timeout_sec = 300
+command = "/mnt/c/Windows/System32/cmd.exe"
+args = ["/c", "npx.cmd", "-y", "chrome-devtools-mcp@latest", '--executablePath=C:\Program Files\Google\Chrome\Application\chrome.exe', "--isolated"]
+startup_timeout_sec = 30.0
+tool_timeout_sec = 300.0
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+
+[mcp_servers.sentry]
+url = "https://mcp.sentry.dev/mcp"
