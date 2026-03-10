@@ -117,3 +117,4 @@ Ignore repo-local skills unless explicitly requested by the user, except when a 
 | **Testing**               | `$CODEX_HOME/skills/testing`                   |
 | **Env / Config**          | `$CODEX_HOME/skills/env-config`                |
 | **Light Task Runner**     | `$CODEX_HOME/skills/light-task-runner`         |
+| **WSL Test Runner**       | `$CODEX_HOME/skills/wsl-test-runner`           |
