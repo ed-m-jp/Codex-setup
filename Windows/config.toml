@@ -50,3 +50,11 @@ env = { SystemRoot="C:\\Windows", PROGRAMFILES="C:\\Program Files" }
 startup_timeout_ms = 20_000
 tool_timeout_sec = 300
 
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+
+[mcp_servers.sentry]
+url = "https://mcp.sentry.dev/mcp"
