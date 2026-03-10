@@ -1,2 +1,6 @@
 # Windows “Mark of the Web” (MOTW) metadata
 *:Zone.Identifier
+
+# System skills
+Windows/skills/.system/*
+Wsl/skills/.system/*
