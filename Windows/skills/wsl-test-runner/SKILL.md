@@ -1,5 +1,5 @@
 ---
-name: php-artisan-test-runner
+name: wsl-test-runner
 description: run php artisan test commands through wsl for php and laravel projects from the current codex working directory. use this skill whenever the user asks to run tests, rerun tests, run php artisan test, execute tests, verify tests, check a new test, check an updated test, or when any plan or todo includes running tests. always use wsl.exe bash -lc, always cd into the current codex working directory, and always run the exact test files provided by the user or, if none are provided, the test files codex created or updated during the current task.
 ---
 
