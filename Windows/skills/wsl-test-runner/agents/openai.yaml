@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wsl test runner"
+  short_description: "Run tests using windows WSL"
+  icon_large: "./assets/testIcon.png"
