@@ -2,5 +2,6 @@
 *:Zone.Identifier
 
 # System skills
-Windows/skills/.system/*
-Wsl/skills/.system/*
+Windows/skills/.system/
+
+Wsl/skills/.system/
