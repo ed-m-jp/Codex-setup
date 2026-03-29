@@ -1,6 +1,6 @@
 ---
 name: review-handoff
-description: organize ai code review handoffs using a per-run review folder under /reviews/review-yyyy-mm-dd-hhmmss/ with review.md for findings and status.yaml for remediation tracking. use when chatgpt is asked to review a codebase, write review findings, hand findings from one agent to another, or maintain a clean claude-to-codex review workflow with separated ownership of findings and status.
+description: organize ai code review handoffs using a per-run review folder under /reviews/review-yyyy-mm-dd-hhmmss/ with review.md for findings and status.yaml for remediation tracking. use when asked to review a codebase, write review findings, hand findings from one agent to another, or maintain a clean cross-agent review workflow with separated ownership of findings and status.
 ---
 
 # Review Handoff

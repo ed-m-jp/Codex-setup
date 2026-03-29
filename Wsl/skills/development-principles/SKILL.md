@@ -12,11 +12,13 @@ metadata:
 Build only what the task needs, validate at boundaries, and keep changes minimal and reviewable.
 
 ## Principles
-- Small diffs win: easiest to review, easiest to rollback.
+
+Rules shared with AGENTS.md Core Rules (DRY, YAGNI, no silent defaults, etc.) are defined there. Do not restate them here.
+
+The following principles are unique to this skill:
+
 - Validate inputs at boundaries: requests, jobs, commands, API entry points.
 - Catch errors at boundaries: controllers/job handlers/CLI entry points. Don't swallow exceptions deep inside helpers.
-- No implicit defaults for required config: missing config should break loudly, not limp along.
-- YAGNI: build only what the task needs right now.
 
 ## Abstraction policy (no speculation)
 - Add abstractions only to remove real duplication or enable required variation.
