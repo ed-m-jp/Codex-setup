@@ -27,15 +27,8 @@ Other skills may reference these rules but must not restate or override them.
 - Ask for a ticket number if one is required; use a fallback like "no-ticket" if none exists.
 
 ## Absolute rules
-- Principles to follow: DRY, SOLID, YAGNI, KISS, no over engineering, no useless abstraction.
-- Do not commit secrets or local config files (.env, tokens, private keys, auth.json, etc.).
-- Fail fast on missing required config (no silent defaults).
-- No speculative abstractions; keep changes minimal and aligned to existing patterns.
-- Don't edit existing migrations; add new ones for schema changes.
-- Avoid drive-by dependency upgrades; keep lockfile changes scoped and justified.
-- No behavior changes without tests (or explicit justification).
-- Avoid cross-surface refactors (backend + frontend + infra) unless required.
-- After fixing the root problem, remove leftover scaffolding/temporary edits.
+
+Core safety and scope rules are defined in AGENTS.md (Core Rules section). Do not restate them here. They are always in effect.
 
 ## Task loop
 1. Locate existing patterns (similar controllers/components/tests). Copy the pattern; don't freestyle.

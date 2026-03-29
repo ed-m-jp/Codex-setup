@@ -18,8 +18,8 @@ Turn a user prompt into a **single, actionable plan** delivered in the final ass
 ## Planning Rules
 
 - Operate in read-only mode unless the repo explicitly requires writing a plan file (e.g. PLAN.md).
-- Always use the todo tool before starting any task touching more than 2 files.
-- Ensure "Run linter" and "Run tests" are always the final two items in any TODO list.
+- This skill is triggered by `light-task-runner` when more than 1 non-test file will change. Do not apply a different threshold.
+- Ensure "Run linter" and "Run tests" are always the final two items in any plan.
 
 ## Workflow
 
@@ -36,7 +36,7 @@ Turn a user prompt into a **single, actionable plan** delivered in the final ass
 3. **Create the plan**
    - Follow the template in `references/plan-template.md` exactly.
    - Use the guidance in `references/checklist-guidance.md` for writing good action items.
-   - Default to 6-10 action items, ordered: discovery -> changes -> tests -> rollout.
+   - Scale action items to the task size (3-5 for small changes, 6-10 for larger work), ordered: discovery -> changes -> tests -> rollout.
    - Include at least one item for **tests/validation** and one for **edge cases/risk** when applicable.
 
 4. **After approval (if repo requires a plan file)**
