@@ -12,8 +12,8 @@ Apply consistent rules when adding or changing environment variables or configur
 ## Workflow
 1. Identify any new or changed env/config values.
 2. Validate required config early; fail loudly if missing.
-3. Update .env.example with safe placeholders when adding env vars.
-4. Use env() only in config files; use config() everywhere else.
+3. Update `.env.example` (or equivalent) with safe placeholders when adding env vars.
+4. Access env vars through the project's config layer, not directly in business logic. Follow the repo's existing pattern for how config is accessed.
 5. Document new requirements in README or inline where appropriate.
 
 ## Output format

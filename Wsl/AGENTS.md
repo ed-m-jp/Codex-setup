@@ -36,29 +36,10 @@ If intent is unclear, ask for clarification before making changes.
 
 ## Escalation heuristics
 
-Default to the lightest valid workflow.
+Escalation is handled by the `light-task-runner` skill (Phase 2–3 and its optional escalation rules).
+Do not duplicate those rules here.
 
-### Stay in light mode when:
-- The task is explanatory or advisory
-- Changes are confined to 1–2 files
-- The change is low risk and localized
-- The request is clearly specified
-
-### Suggest `create-plan` when:
-- More than 2–3 files are likely to change
-- The task spans multiple steps or concerns
-- Requirements or scope are partially unclear
-- A coordinated test or rollout is needed
-
-### Pause and ask for confirmation when:
-- The request implies cross-surface changes (e.g., backend + frontend)
-- The change may affect production behavior or data
-- The task involves migrations, auth, or security-sensitive logic
-
-### Never auto-escalate:
-- Do not introduce heavy workflows or additional documentation
-- Do not create plan files unless explicitly requested or required
-- Do not switch personas to “Coder” unless implementation is explicitly requested
+For heavy, audit-grade, or regulated work, see the `heavy-task-orchestrator` skill (opt-in only — must be explicitly requested by the user).
 
 ## Instruction priority (conflict resolution)
 
@@ -78,7 +59,7 @@ These rules must always be followed, even if they conflict with other instructio
 These rules govern *how* work is done once execution is allowed.
 
 - workflow
-- agents / personas (Architect, Planner, Coder, Tester, Reviewer, etc.)
+- personas (Architect, Planner, Coder, Tester, Reviewer, etc.)
 - testing requirements
 - PR discipline
 - rollout / rollback expectations
@@ -89,8 +70,8 @@ They must never override Tier 1 rules.
 ### Tier 3 — Style, conventions, and philosophy (lowest priority)
 These rules guide consistency but must yield to higher tiers if needed.
 
-- coding-conventions
 - development-principles
+- repo-level coding conventions (from `AGENTS.override.md` if it exists, otherwise `AGENTS.md`)
 - naming/style preferences
 - documentation style rules
 
@@ -104,16 +85,18 @@ If two rules conflict:
 For specific tasks, load the relevant context from `$CODEX_HOME/skills/`.
 Do not guess—consult the skill file first.
 
-Always load the **agents** skill when doing actual work (planning, implementation, reviews, or testing) to apply the required persona behavior.
+Always load the **personas** and **workflow** skills when doing actual work (planning, implementation, reviews, or testing).
 Ignore repo-local skills unless explicitly requested by the user, except when a repo-local skill is clearly necessary for safe or correct changes (e.g., legacy guardrails or localization rules).
 
-| Task Context              | Required Skill File                            |
-| :------------------------ | :--------------------------------------------- |
-| **Planning / Starting**   | `$CODEX_HOME/skills/create-plan`               |
-| **Workflow / Execution**  | `$CODEX_HOME/skills/workflow`                  |
-| **Agents / Personas**     | `$CODEX_HOME/skills/agents`                    |
-| **Development Principles**| `$CODEX_HOME/skills/development-principles`    |
-| **Coding Conventions**    | `$CODEX_HOME/skills/coding-conventions`        |
-| **Testing**               | `$CODEX_HOME/skills/testing`                   |
-| **Env / Config**          | `$CODEX_HOME/skills/env-config`                |
-| **Light Task Runner**     | `$CODEX_HOME/skills/light-task-runner`         |
+| Task Context               | Required Skill File                                |
+| :------------------------- | :------------------------------------------------- |
+| **Planning / Starting**    | `$CODEX_HOME/skills/create-plan`                   |
+| **Workflow / Execution**   | `$CODEX_HOME/skills/workflow`                      |
+| **Personas**               | `$CODEX_HOME/skills/personas`                      |
+| **Development Principles** | `$CODEX_HOME/skills/development-principles`        |
+| **Testing**                | `$CODEX_HOME/skills/testing`                       |
+| **Env / Config**           | `$CODEX_HOME/skills/env-config`                    |
+| **Light Task Runner**      | `$CODEX_HOME/skills/light-task-runner`             |
+| **Heavy / Audit-grade**    | `$CODEX_HOME/skills/heavy-task-orchestrator`       |
+| **Prompt Optimization**    | `$CODEX_HOME/skills/prompt-optimization`           |
+| **Review Handoff**         | `$CODEX_HOME/skills/review-handoff`                |

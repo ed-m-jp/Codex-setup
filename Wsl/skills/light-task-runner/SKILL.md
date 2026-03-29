@@ -1,102 +1,78 @@
 ---
 name: light-task-runner
-description: Lightweight execution guardrails for coding tasks. Prevents hallucination, enforces scope and evidence, without heavy ceremony.
+description: >-
+  Default execution framework for all tasks. Enforces quality, correctness,
+  and evidence without blocking the agent from acting. Assumes a sandboxed
+  workspace environment.
 ---
 
 # Light Task Runner
 
 ## Core principles
 
-### Absolute rules
-
-- Deliver exactly what the user asked for — nothing more, nothing less.
-- Do not implement or modify files unless the user explicitly asked you to.
 - If a file or path is mentioned, open it before making claims.
-- Ask questions only if blocked (max 1–2).
-- Follow execution and refactor rules defined in `workflow`.
+- Ask questions only if blocked (max 1-2).
+- Do not cut corners to avoid adjacent changes that are necessary for correctness (e.g., fixing a broken import caused by your rename).
+- Follow execution and refactor rules defined in `workflow`. Do not restate them here.
 
 ---
 
-## Minimal execution loop
+## Mode gate
 
-### Phase 1: Task sanity check (always)
-
-Before doing anything:
-
-- Restate the task in 1–3 bullet points.
-- List constraints explicitly (repo rules, scope limits, “don’t change X”).
-- Identify blockers (if any).
-
-If blocked → ask the user and stop.  
-Otherwise → proceed.
+If the task is purely advisory or explanatory (no file changes needed), respond directly.
+The execution loop below applies only to tasks that involve changes.
 
 ---
 
-### Phase 2: Context scan (read-only)
+## Execution loop
+
+### Phase 1: Context scan (read-only)
 
 - Skim `README.md` and obvious docs.
 - Open only files likely to be touched.
-- Follow existing patterns; do not freestyle.
+- Identify constraints (repo rules, scope limits, existing patterns).
 
-If more than ~2 files are likely involved and no plan exists → suggest using `create-plan`.
-
----
-
-### Phase 3: Decide the mode
-
-Choose exactly one:
-
-- Explain-only (analysis or guidance, no file changes)
-- Plan-only (hand off to `create-plan`)
-- Implement (proceed with changes)
-
-If the user did not explicitly request implementation, default to Explain or Plan.
+If blocked by missing information -> ask the user and stop.
+Otherwise -> proceed.
 
 ---
 
-### Phase 4: Implement (only if asked)
+### Phase 2: Scope check
 
-- Make the smallest change that solves the task.
-- Keep changes localized.
-- Follow repo conventions exactly.
-- No behavior change without tests (or explicit justification).
+Evaluate how many **non-test** files will be changed:
 
-If new ambiguity appears, stop and ask before proceeding.
+- **1 file** (excluding tests) -> proceed directly to Phase 3.
+- **More than 1 file** (excluding tests) -> use `create-plan` before implementing. Do not skip this step. Wait for user approval of the plan before proceeding to Phase 3.
+
+Test files do not count toward this threshold. A task touching 1 source file + 3 test files proceeds directly.
 
 ---
 
-### Phase 5: Validation & evidence (required)
+### Phase 3: Implement
 
-Before declaring the task complete, include:
+- Make targeted changes that solve the task.
+- If new ambiguity appears mid-implementation, stop and ask before proceeding.
+- Do not move to Phase 4 until tests covering the changes exist, or the absence of tests is justified in Phase 4.
+
+---
+
+### Phase 4: Validation & done
+
+Before declaring the task complete:
 
 - What changed (files + brief reason)
 - How it was validated:
   - Commands run (or why not)
   - Test results / exit codes
   - Screenshots for UI changes (if applicable)
+- If validation could not be run, explain why and state what should be run in CI or by the user
 
-If validation could not be run:
-- Explain why
-- State what should be run in CI or by the user
-
----
-
-### Phase 6: Done criteria
-
-A task is done when:
-
-- Scope matches the request exactly
-- Diff is minimal and reviewable
-- Validation evidence is provided
-- No unexplained assumptions remain
+The task is done when the request is fulfilled, evidence is provided, and no unexplained assumptions remain.
 
 ---
 
-## Optional escalation rules
+## Escalation rules
 
-Escalate only when necessary:
-
-- Touching more than 2–3 files → use `create-plan`
-- Significant behavior change → add tests + explicit validation
-- Cross-surface changes (backend + frontend, etc.) → ask for confirmation
-- High-risk changes → include rollback notes
+- Cross-surface changes (backend + frontend, etc.) -> ask for confirmation before starting
+- High-risk changes (migrations, auth, security) -> include rollback notes
+- Heavy / audit-grade work -> suggest `heavy-task-orchestrator` (user must opt in)
