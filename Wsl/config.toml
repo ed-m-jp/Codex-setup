@@ -1,15 +1,38 @@
+# =============================================================================
+# Model
+# =============================================================================
+
 model = "gpt-5.3-codex"
 model_reasoning_effort = "high"
+model_auto_compact_token_limit = 200000
 
-suppress_unstable_features_warning = true
+# =============================================================================
+# Sandbox & Permissions
+# =============================================================================
 
-model_auto_compact_token_limit = 100000
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
 
 [sandbox_workspace_write]
 network_access = true
 
+# =============================================================================
+# Features
+# =============================================================================
+
+suppress_unstable_features_warning = true
+
+[features]
+rmcp_client = true
+fast_mode = false
+
+# =============================================================================
+# Shell Environment Policy
+# =============================================================================
+
 [shell_environment_policy]
 exclude = [
+  # Secrets & credentials
   "*PASSWORD*",
   "*PASS*",
   "*SECRET*",
@@ -23,11 +46,12 @@ exclude = [
   "*DSN*",
   "*SALT*",
   "*HASH*",
+  # Cloud providers
   "AWS_*",
   "AZURE_*",
   "GCP_*",
-  "GCPOGLE_*",
   "GOOGLE_*",
+  # Third-party services
   "OPENAI_*",
   "STRIPE_*",
   "SENTRY_*",
@@ -36,8 +60,40 @@ exclude = [
   "PAYPAL_*",
 ]
 
-[features]
-rmcp_client = true
+# =============================================================================
+# Trusted Projects
+# =============================================================================
+
+[projects."/home/edward_maire/workProjects/zaikoio"]
+trust_level = "trusted"
+
+[projects."/home/edward_maire/projects/zaikoio"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/edward.maire/PhpstormProjects/zaikoio"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/edward.maire/PhpstormProjects/access-queue"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/edward.maire/PhpstormProjects/zaikolive"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/edward.maire/perso/Code-Scope"]
+trust_level = "trusted"
+
+[projects.'\\?\C:\Users\edward.maire\PhpstormProjects\zaikoio']
+trust_level = "trusted"
+
+[projects."C:\\Users\\edward.maire"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/edward.maire"]
+trust_level = "untrusted"
+
+# =============================================================================
+# MCP Servers
+# =============================================================================
 
 [mcp_servers.laravel-boost]
 command = "php"
@@ -59,3 +115,13 @@ url = "https://mcp.linear.app/mcp"
 
 [mcp_servers.sentry]
 url = "https://mcp.sentry.dev/mcp"
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+# =============================================================================
+# Notices
+# =============================================================================
+
+[notice]
+hide_rate_limit_model_nudge = true
