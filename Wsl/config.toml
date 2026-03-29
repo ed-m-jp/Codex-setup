@@ -12,6 +12,7 @@ model_auto_compact_token_limit = 200000
 
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
+personality = "pragmatic"
 
 [sandbox_workspace_write]
 network_access = true
@@ -25,6 +26,14 @@ suppress_unstable_features_warning = true
 [features]
 rmcp_client = true
 fast_mode = false
+
+# =============================================================================
+# Agents
+# =============================================================================
+
+[agents]
+max_threads = 6
+max_depth = 1
 
 # =============================================================================
 # Shell Environment Policy
@@ -125,3 +134,9 @@ url = "https://mcp.notion.com/mcp"
 
 [notice]
 hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.3-codex" = "gpt-5.4"
+
+[plugins."github@openai-curated"]
+enabled = true
