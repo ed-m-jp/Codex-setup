@@ -43,6 +43,9 @@ Each review run directory must contain:
 - Do not delete or silently rewrite original findings
 - If a finding is unclear, interpret it conservatively and record assumptions in `status.yaml`
 
+##constrains (not negociable)
+- The fixing agent should always assess whether the review is correct and provide a report before starting remediation.
+
 ## Directory creation
 
 When a new review session starts, generate a timestamped folder name in this format:
